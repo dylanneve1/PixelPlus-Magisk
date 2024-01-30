@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := safetynetfix
+LOCAL_MODULE := pixelplus
 LOCAL_SRC_FILES := module.cpp
 LOCAL_STATIC_LIBRARIES := libcxx
 LOCAL_LDLIBS := -llog

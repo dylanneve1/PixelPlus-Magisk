@@ -23,12 +23,12 @@ popd
 mkdir -p magisk/zygisk
 for arch in arm64-v8a armeabi-v7a x86 x86_64
 do
-    cp "zygisk/module/libs/$arch/libsafetynetfix.so" "magisk/zygisk/$arch.so"
+    cp "zygisk/module/libs/$arch/libpixelplus.so" "magisk/zygisk/$arch.so"
 done
 
 pushd magisk
 version="$(grep '^version=' module.prop  | cut -d= -f2)"
-rm -f "../safetynet-fix-$version.zip" classes.dex
+rm -f "../pixelplus-$version.zip" classes.dex
 unzip "../java/app/build/outputs/apk/release/app-release.apk" "classes.dex"
-zip -r9 "../safetynet-fix-$version.zip" .
+zip -r9 "../pixelplus-$version.zip" .
 popd

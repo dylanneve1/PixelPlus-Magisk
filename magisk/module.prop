@@ -1,7 +1,6 @@
-id=safetynet-fix
-name=Universal SafetyNet Fix
-version=v2.4.0
-versionCode=20400
-author=kdrag0n
-description=A universal fix for SafetyNet and Play Integrity on Android 8–13 devices with hardware attestation.
-updateJson=https://raw.githubusercontent.com/kdrag0n/safetynet-fix/master/update.json
+id=pixelplus
+name=PixelPlus
+version=v1
+versionCode=1
+author=dylanneve1
+description=Extra features for Pixel devices.

@@ -1,4 +1,4 @@
-package dev.kdrag0n.safetynetfix
+package com.dylanneve1.pixelplus
 
 @Suppress("unused")
 object EntryPoint {
