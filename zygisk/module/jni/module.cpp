@@ -76,9 +76,10 @@ private:
 
     bool isBlacklisted (const std::string& process) {
         bool ret = false;
-        int len = 1;
+        int len = 2;
 
         std::vector<std::string> blacklist = {
+            "com.google.android.apps.photos",
             "com.google.android.GoogleCamera"
         };
 
