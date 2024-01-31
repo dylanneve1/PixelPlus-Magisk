@@ -1,0 +1,42 @@
+name: Build PixelPlus Zygisk Module
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'  # Adjust if needed
+          distribution: 'temurin'
+      - name: Set environment variables
+        run: |
+          echo "ANDROID_HOME=$HOME/Android/sdk" >> $GITHUB_ENV
+      - name: Set up Android SDK and NDK
+        uses: android-actions/setup-android@v2
+      - uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          link-to-sdk: true
+          ndk-version: r21e
+      - name: Make script executable
+        run: chmod +x ./build.sh
+      - name: Build module
+        run: |
+          ./build.sh  # Consider adding input parameters for build modes etc.
+      - name: Archive artifacts (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: pixelplus-build
+          path: PixelPlus.zip
+
+# Notes:
+# - Update paths and commands in the script if needed for your project structure.
+# - Use GitHub secrets for sensitive information (e.g., API keys).
+# - Consider employing actions from the GitHub Marketplace for advanced tasks.
+
