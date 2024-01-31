@@ -28,7 +28,7 @@ done
 
 pushd magisk
 version="$(grep '^version=' module.prop  | cut -d= -f2)"
-rm -f "../pixelplus-$version.zip" classes.dex
+rm -f "../PixelPlus.zip" classes.dex
 unzip "../java/app/build/outputs/apk/release/app-release.apk" "classes.dex"
-zip -r9 "../pixelplus-$version.zip" .
+zip -r9 "../PixelPlus.zip" .
 popd
