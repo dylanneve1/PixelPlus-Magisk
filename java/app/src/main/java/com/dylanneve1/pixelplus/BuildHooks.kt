@@ -4,30 +4,20 @@ import android.os.Build
 
 internal object BuildHooks {
     fun init() {
-        val spoofedProduct = "husky"
-        val spoofedDevice = "husky"
-        val spoofedModel = "Pixel 8 Pro"
-        val spoofedFingerprint = "google/husky/husky:14/UQ1A.240105.004/11206848:user/release-keys"
+        val product = "panther"
+        val device = "panther"
+        val model = "Pixel 7"
+        val board = "panther"
 
-        logDebug("Spoof PRODUCT prop. Set it to: $spoofedProduct")
-        Build::class.java.getDeclaredField("PRODUCT").let { field ->
-            field.isAccessible = true
-            field.set(null, spoofedProduct)
-        }
-        logDebug("Spoof DEVICE prop. Set it to: $spoofedDevice")
-        Build::class.java.getDeclaredField("DEVICE").let { field ->
-            field.isAccessible = true
-            field.set(null, spoofedDevice)
-        }
-        logDebug("Spoof MODEL prop. Set it to: $spoofedModel")
-        Build::class.java.getDeclaredField("MODEL").let { field ->
-            field.isAccessible = true
-            field.set(null, spoofedModel)
-        }
-        logDebug("Spoof FINGERPRINT prop. Set it to: $spoofedFingerprint")
-        Build::class.java.getDeclaredField("FINGERPRINT").let { field ->
-            field.isAccessible = true
-            field.set(null, spoofedFingerprint)
+        val fields = arrayOf("PRODUCT", "DEVICE", "MODEL", "BOARD")
+        val spoofs = arrayOf(product, device, model, board)
+
+        for (i in fields.indices) {
+            logDebug("Spoof ${fields[i]} prop. Set it to: ${spoofs[i]}")
+            Build::class.java.getDeclaredField(fields[i]).let { field ->
+                field.isAccessible = true
+                field.set(null, spoofs[i])
+            }
         }
     }
 }

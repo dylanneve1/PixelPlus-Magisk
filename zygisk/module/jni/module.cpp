@@ -74,17 +74,20 @@ private:
         return bytesReceived;
     }
 
-    bool isBlacklisted (const std::string& process) {
+    bool isWhitelisted (const std::string& process) {
         bool ret = false;
-        int len = 2;
+        int len = 5;
 
-        std::vector<std::string> blacklist = {
+        std::vector<std::string> whitelist = {
             "com.google.android.apps.photos",
+            "com.google.android.as",
+            "com.google.android.settings.intelligence",
+            "com.android.settings",
             "com.google.android.GoogleCamera"
         };
 
         for (int i = 0; i < len; i++) {
-            if (process == blacklist[i]) {
+            if (process == whitelist[i]) {
                 ret = true;
             }
         }
@@ -102,7 +105,7 @@ private:
     }
 
     void preSpecialize(const std::string& process) {
-        if (!isBlacklisted(process)) {
+        if (isWhitelisted(process)) {
             // Load the payload, but don't inject it yet until after specialization
             // Otherwise, specialization fails if any code from the payload still happens to be
             // running
