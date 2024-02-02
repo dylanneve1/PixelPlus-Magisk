@@ -76,15 +76,9 @@ private:
 
     bool isWhitelisted (const std::string& process) {
         bool ret = false;
-        int len = 7;
+        int len = 1;
 
         std::vector<std::string> whitelist = {
-            "com.google.android.apps.photos",
-            "com.google.android.as",
-            "com.google.android.gms",
-            "com.google.android.gsf",
-            "com.google.android.settings.intelligence",
-            "com.android.settings",
             "com.google.android.GoogleCamera"
         };
 
