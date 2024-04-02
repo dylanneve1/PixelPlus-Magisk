@@ -7,7 +7,7 @@ internal object BuildHooks {
         val spoofedProduct = "husky"
         val spoofedDevice = "husky"
         val spoofedModel = "Pixel 8 Pro"
-        val spoofedFingerprint = "google/husky/husky:14/UQ1A.240105.004/11206848:user/release-keys"
+        val spoofedFingerprint = "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys"
 
         logDebug("Spoof PRODUCT prop. Set it to: $spoofedProduct")
         Build::class.java.getDeclaredField("PRODUCT").let { field ->

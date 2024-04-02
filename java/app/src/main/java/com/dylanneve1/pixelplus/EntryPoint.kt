@@ -5,7 +5,7 @@ object EntryPoint {
     @JvmStatic
     fun init() {
         try {
-            logDebug("Entry point: Initializing SafetyNet patches")
+            logDebug("Entry point: Initializing PixelPlus patches")
             BuildHooks.init()
         } catch (e: Throwable) {
             // Throwing an exception would require the JNI code to handle exceptions, so just catch
