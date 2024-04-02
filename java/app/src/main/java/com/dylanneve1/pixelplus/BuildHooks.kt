@@ -30,4 +30,13 @@ internal object BuildHooks {
             field.set(null, spoofedFingerprint)
         }
     }
+    fun initGoogleApp() {
+        val spoofedFingerprint = "google/husky/husky:14/AP1A.240305.019.A1/11445699:user/release-keys"
+
+        logDebug("Spoof FINGERPRINT prop. Set it to: $spoofedFingerprint")
+        Build::class.java.getDeclaredField("FINGERPRINT").let { field ->
+            field.isAccessible = true
+            field.set(null, spoofedFingerprint)
+        }
+    }
 }

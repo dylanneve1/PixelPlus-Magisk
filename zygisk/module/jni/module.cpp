@@ -34,7 +34,11 @@ public:
         // Inject if module was loaded, otherwise this would've been unloaded by now (for non-GMS)
         if (!moduleDex.empty()) {
             LOGD("Injecting payload...");
-            injectPayload();
+            if (isGoogleApp) {
+                injectPayload(true);
+            } else {
+                injectPayload(false);
+            }
             LOGI("Payload injected");
         }
     }
@@ -49,6 +53,8 @@ private:
     JNIEnv *env;
 
     std::vector<char> moduleDex;
+
+    bool isGoogleApp;
 
     static int receiveFile(int remote_fd, std::vector<char>& buf) {
         off_t size;
@@ -84,8 +90,14 @@ private:
 
         for (int i = 0; i < len; i++) {
             if (process == blacklist[i]) {
+                isGoogleApp = false;
                 ret = true;
             }
+        }
+
+        if (process == "com.google.android.googlequicksearchbox" || process == "com.evo.inware") {
+            isGoogleApp = true;
+            ret = true;
         }
 
         return ret;
@@ -111,7 +123,7 @@ private:
         }
     }
 
-    void injectPayload() {
+    void injectPayload(bool isGoogleApp) {
         // First, get the system classloader
         LOGD("get system classloader");
         auto clClass = env->FindClass("java/lang/ClassLoader");
@@ -140,7 +152,13 @@ private:
         // Call init. Static initializers don't run when merely calling loadClass from JNI.
         LOGD("call init");
         auto entryClass = (jclass) entryClassObj;
-        auto entryInit = env->GetStaticMethodID(entryClass, "init", "()V");
+        std::string entryStr;
+        if (isGoogleApp) {
+            entryStr = "init";
+        } else {
+            entryStr = "initGoogleApp";
+        }
+        auto entryInit = env->GetStaticMethodID(entryClass, entryStr.c_str(), "()V");
         env->CallStaticVoidMethod(entryClass, entryInit);
     }
 };
